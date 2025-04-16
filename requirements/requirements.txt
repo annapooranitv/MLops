@@ -5,3 +5,6 @@ pydantic
 ruamel.yaml
 scikit-learn
 strictyaml
+black
+pylint
+pytest
