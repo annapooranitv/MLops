@@ -93,8 +93,9 @@ def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     mapping between the package version and the model
     version to be imported and used by other applications.
     """
-    do_not_delete = files_to_keep + ["__init__.py", ".gitignore"]
+    do_not_delete = files_to_keep + ["__pycache__", "__init__.py", ".gitignore"]
     for model_file in TRAINED_MODEL_DIR.iterdir():
+        print(model_file.name, model_file)
         if model_file.name not in do_not_delete:
             model_file.unlink()
 
