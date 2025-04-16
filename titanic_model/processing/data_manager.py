@@ -13,7 +13,7 @@ from sklearn.pipeline import Pipeline
 from titanic_model import __version__ as _version
 from titanic_model.config.core import DATASET_DIR, TRAINED_MODEL_DIR, config
 
-
+print("000")
 ##  Pre-Pipeline Preparation
 
 # 1. Extracts the title (Mr, Ms, etc) from the name variable
@@ -72,8 +72,9 @@ def save_pipeline(*, pipeline_to_persist: Pipeline) -> None:
     # Prepare versioned save file name
     save_file_name = f"{config.app_config_.pipeline_save_file}{_version}.pkl"
     save_path = TRAINED_MODEL_DIR / save_file_name
-
+    print("222")
     remove_old_pipelines(files_to_keep=[save_file_name])
+    print("333")
     joblib.dump(pipeline_to_persist, save_path)
     print("Model/pipeline trained successfully!")
 
@@ -87,6 +88,7 @@ def load_pipeline(*, file_name: str) -> Pipeline:
 
 
 def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
+    print("111")
     """
     Remove old model pipelines.
     This is to ensure there is a simple one-to-one
@@ -94,6 +96,7 @@ def remove_old_pipelines(*, files_to_keep: t.List[str]) -> None:
     version to be imported and used by other applications.
     """
     do_not_delete = files_to_keep + ["__pycache__", "__init__.py", ".gitignore"]
+    
     for model_file in TRAINED_MODEL_DIR.iterdir():
         print(model_file.name, model_file)
         if model_file.name not in do_not_delete:
